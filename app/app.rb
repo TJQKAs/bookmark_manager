@@ -3,13 +3,12 @@ require_relative '../data_mapper_setup'
 
 class BookmarksWeb < Sinatra::Base
 
- get '/' do 
+ get '/' do
 redirect '/links'
 end
 
   get '/links' do
     @links = Link.all
-
     erb :links
   end
 
