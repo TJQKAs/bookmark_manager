@@ -3,9 +3,9 @@ require_relative '../data_mapper_setup'
 
 class BookmarksWeb < Sinatra::Base
 
- get '/' do
-redirect '/links'
-end
+  get '/' do
+    redirect '/links'
+  end
 
   get '/links' do
     @links = Link.all
@@ -13,7 +13,10 @@ end
   end
 
   post '/links' do
-    Link.create(url: params[:url], title: params[:title] )
+  link=Link.create(url: params[:url], title: params[:title] )
+  tag=Tag.create(name: params[:tag])
+  link.tags << tag
+  link.save
     redirect '/links'
   end
 
