@@ -13,7 +13,7 @@ group :development, :test do
   # gem 'rubocop-rspec'
   # gem 'rubocop'
   # gem 'coveralls', require: false
-  gem 'capybara'
+  gem 'capybara'    
   gem 'rspec-sinatra'
   gem 'shotgun'
   gem 'launchy'
