@@ -12,9 +12,9 @@ set :session_secret, 'super secret'
 
   get '/links' do
     @links = Link.all
-    if User.first(id: session[:user_id])
-      @email = User.first(id: session[:user_id]).email
-    end
+    # if User.first(id: session[:user_id])
+    #   @email = User.first(id: session[:user_id]).email
+    # end
     erb :links
   end
 
@@ -46,9 +46,16 @@ set :session_secret, 'super secret'
 
   post '/users' do
     user = User.create(email: params[:email],
-              password: params[:password])
+              password: params[:password],
+              password_confirmation: params[:password_confirmation])
     session[:user_id] = user.id
     redirect to ('/links')
+  end
+
+     helpers do
+     def current_user
+         current_user ||= User.first(id: session[:user_id])
+     end
   end
 
   set :views, proc { File.join(root, 'views') }
