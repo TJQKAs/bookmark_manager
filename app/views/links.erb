@@ -1,11 +1,15 @@
 <h1> Links </h1>
+"Welcome, <%= @email %>"
 
 <ul id="links">
   <% @links.each do |link| %>
     <li>
       Title: <%= link.title %>
       URL:   <%= link.url   %>
-      Tags:  <%= link.tags  %>
+      Tags:
+      <% link.tags.each do |tag| %>
+        <%= tag %>
+      <% end %>
     </li>
   <% end %>
 </ul>
