@@ -6,6 +6,7 @@ source "https://rubygems.org"
 
 gem 'sinatra'
 gem 'data_mapper'
+gem 'sinatra-flash'
 gem 'dm-postgres-adapter'
 gem 'database_cleaner'
 group :development, :test do
