@@ -39,10 +39,8 @@ feature 'user sign up'  do
       visit '/users/new'
       click_button 'Sign up'
       expect(current_path).to eq('/users')
-      expect(page).to have_content 'You must input a valid email'
+      expect(page).to have_content 'Email must not be blank'
   end
-
-
 
    scenario 'with a password that does not match' do
      user = build :userfail
@@ -51,7 +49,7 @@ feature 'user sign up'  do
     #              password_confirmation: '123456789')
      expect { sign_up(user)}.not_to change(User, :count)
      expect(current_path).to eq('/users')
-     expect(page).to have_content 'Password and confirmation password do not match'
+     expect(page).to have_content 'Password does not match the confirmation'
    end
 
     scenario 'I cannot sign up with an exisitng email' do
@@ -60,6 +58,17 @@ feature 'user sign up'  do
       expect{ sign_up(user)}.to change(User, :count).by(0)
       expect(page).to have_content('Email is already taken')
     end
+
+     scenario 'with correct credentials' do
+       user = build :user
+       sign_in(email: user.email, password: user.password)
+       expect(page).to have_content "Welcome, #{user.email}"
+     end
+
+     def sign_in(email:, password:)
+       visit '/sessions/new'
+     end
+
 
 
 end
