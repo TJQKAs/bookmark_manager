@@ -18,6 +18,7 @@ group :development, :test do
   gem 'rspec-sinatra'
   gem 'shotgun'
   gem 'launchy'
+  gem 'factory_girl'
 #   gem 'selenium-webdriver'
   gem 'byebug'
 end
