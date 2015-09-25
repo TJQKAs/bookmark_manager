@@ -30,6 +30,16 @@ feature 'user sign up'  do
     click_button 'Sign up'
   end
 
+
+   scenario "I can't sign in without entering an email adress"  do
+      visit '/users/new'
+      click_button 'Sign up'
+      expect(current_path).to eq('/users')
+      expect(page).to have_content 'You must input a valid email'
+  end
+
+
+
    scenario 'with a password that does not match' do
      expect { sign_up(password_confirmation: 'wrong')}.not_to change(User, :count)
      expect(current_path).to eq('/users')
